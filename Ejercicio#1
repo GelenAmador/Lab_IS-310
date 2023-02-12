@@ -1,0 +1,64 @@
+/* 
+ LABORATORIO #1
+ CLASES EN C++ 
+ Introducción a la programacion Orientada a Objetos
+ Fecha: 16/02/2023
+ Version programa: 1.0
+ */
+
+#include<iostream>
+#include<stdlib.h>
+
+using namespace std;
+
+class Estudiante { 
+	//Atributos del estudiante 
+	// Usando Camel case en la escritura de las variables
+	private:
+		string numeroCuenta;
+		string nombre;
+		int indiceGlobal;
+	
+	//Acciones del estudiante 
+	public:
+		Estudiante(string,string,int); //Contructor
+		void matricular();
+		void programar();
+		void estudiar();
+		
+};
+
+//Creación del constructor: Su funcion es inicializar los atributos de la clase
+Estudiante::Estudiante(string numeroCuentaEstudiante,string nombreEstudiante,int indiceGlobalEstudiante){
+	numeroCuenta = numeroCuentaEstudiante;
+	nombre = nombreEstudiante;
+	indiceGlobal = indiceGlobalEstudiante;	
+}
+
+//FUNCIONES
+void Estudiante::matricular(){
+	cout<<"Estudiante con número de cuenta: "<<numeroCuenta<<
+	" Con indice Global de:  "<<indiceGlobal<<" Le toca matricular el primer dia de prematricula"<<endl;
+}
+
+void Estudiante::programar(){
+	cout<<"Soy "<<nombre<<" y me gusta programar por la madrugada"<<endl;
+}
+	
+void Estudiante::estudiar(){
+	cout<<"Soy "<<nombre<<" y estoy estudiando para mi clase de Algoritmos y estructura de datos"<<endl;
+}
+	 
+	
+int main(){
+	//Creacion del objeto
+	Estudiante pumita = Estudiante("20191003671", "Pedro Molina", 90);
+	
+	//llamado a las funciones
+	
+	//pumita.estudiar();
+	//pumita.matricular();
+	pumita.programar();
+	system("pause");
+	return 0;
+}
