@@ -1,0 +1,60 @@
+/* 
+ LABORATORIO #2
+ RECURSIVIDAD EN C++ 
+ Implementación de algoritmo de búsqueda binaria 
+ Fecha: 23/02/2023
+ Version programa: 1.0
+ */
+
+#include <stdio.h>
+ 
+int binarySearch(int nums[], int low, int high, int target)
+{
+    // Condición base (el espacio de búsqueda está agotado)
+    if (low > high) {
+        return -1;
+    }
+ 
+    // encuentra el valor medio en el espacio de búsqueda y
+    // lo compara con el objetivo
+ 
+    int mid = (low + high)/2;    // puede ocurrir un desbordamiento
+    // int mid = low + (high - low)/2;
+ 
+    // Condición base (se encuentra el valor objetivo)
+    if (target == nums[mid]) {
+        return mid;
+    }
+ 
+    // descartar todos los elementos en el espacio de búsqueda correcto,
+    // incluyendo el elemento del medio
+    else if (target < nums[mid]) {
+        return binarySearch(nums, low, mid - 1, target);
+    }
+ 
+    // descartar todos los elementos en el espacio de búsqueda de la izquierda,
+    // incluyendo el elemento del medio
+    else {
+        return binarySearch(nums, mid + 1, high, target);
+    }
+}
+ 
+int main(void)
+{
+    int nums[] = { 2, 5, 6, 8, 9, 10 };
+    int target = 10;
+ 
+    int n = sizeof(nums)/sizeof(nums[0]);
+ 
+    int low = 0, high = n - 1;
+    int index = binarySearch(nums, low, high, target);
+ 
+    if (index != -1) {
+        printf("El elemento se encuentra en el indice: %d", index);
+    }
+    else {
+        printf("Elemento no encontrado en el arreglo");
+    }
+ 
+    return 0;
+}
