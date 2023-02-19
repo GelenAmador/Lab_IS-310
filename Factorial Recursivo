@@ -1,0 +1,28 @@
+/* 
+ LABORATORIO #2
+ RECURSIVIDAD EN C++ 
+ Fecha: 23/02/2023
+ Version programa: 1.0
+ */
+
+#include <iostream>
+using namespace std;
+
+int factorial(int n) {
+	//CasoBase
+    if (n == 0) {
+        return 1;
+    }
+    //CasoRecursivo
+    else {
+        return n * factorial(n-1);
+    }
+}
+
+int main() {
+	//Numero del cual quiero saber su factorial
+    int n = 5;
+    int fact = factorial(n); //Guardo lo que me retorna la funcion Factorial
+    cout << "El factorial de " << n << " es " << fact << endl;
+    return 0;
+}
