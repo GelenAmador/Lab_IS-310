@@ -1,0 +1,30 @@
+#include <iostream>
+#include <queue>
+
+int main() {
+    std::queue<int> cola;
+
+    cola.push(10);
+    cola.push(20);
+    cola.push(30);
+
+    std::cout << "Elemento frontal: " << cola.front() << std::endl;
+
+    cola.pop();
+
+    std::cout << "Elemento frontal: " << cola.front() << std::endl;
+
+    cola.push(40);
+    cola.push(50);
+
+    std::cout << "¿Está vacia la cola? " << cola.empty() << std::endl;
+    std::cout << "Tamano de la cola: " << cola.size() << std::endl;
+
+    while (!cola.empty()) {
+        std::cout << cola.front() << " ";
+        cola.pop();
+    }
+    std::cout << std::endl;
+
+    return 0;
+}
