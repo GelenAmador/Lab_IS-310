@@ -1,0 +1,84 @@
+#include <iostream>
+
+class Pila {
+private:
+    int capacidad;
+    int tamano;
+    int* elementos;
+
+public:
+	//Primer constructor para la capacidad de la pila
+    Pila(int capacidad) {
+        this->capacidad = capacidad;
+        this->tamano = 0;
+        this->elementos = new int[capacidad];
+    }
+
+	//segundo constructor para la eliminacion de los elementos 
+    ~Pila() {
+        delete[] elementos;
+    }
+
+	//Agregar elemento a la pila
+    void push(int elemento) {
+        if (tamano >= capacidad) {
+            std::cout << "Error: la pila esta llena" << std::endl;
+            return;
+        }
+
+        elementos[tamano] = elemento;
+        tamano++;
+    }
+
+	//Quitar elemento de la pila
+    int pop() {
+        if (tamano <= 0) {
+            std::cout << "Error: la pila esta vacia" << std::endl;
+            return -1;
+        }
+
+        tamano--;
+        return elementos[tamano];
+    }
+
+	//Regresar el elemento que esta en la cima de la pila
+    int top() {
+        if (tamano <= 0) {
+            std::cout << "Error: la pila esta vacia" << std::endl;
+            return -1;
+        }
+
+        return elementos[tamano - 1];
+    }
+
+	//pila vacia
+    bool estaVacia() {
+        return tamano == 0;
+    }
+    
+};
+
+int main() {
+	
+    Pila pila(5);
+
+    pila.push(10);
+    pila.push(20);
+    pila.push(30);
+    pila.push(40);
+    pila.push(50);
+
+    std::cout << "Elemento superior: " << pila.top() << std::endl;
+
+    pila.pop();
+
+    std::cout << "Nuevo elemento superior: " << pila.top() << std::endl;
+
+    if (pila.estaVacia()) {
+        std::cout << "La pila esta vacia" << std::endl;
+    } else {
+        std::cout << "La pila no esta vacia" << std::endl;
+    }
+
+    return 0;
+}
