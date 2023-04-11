@@ -1,0 +1,97 @@
+#include <iostream>
+
+const int MAX_ELEMENTOS = 5;
+
+class Cola {
+private:
+    int elementos[MAX_ELEMENTOS];   // Arreglo estático para los elementos de la cola
+    int frente;                     // Índice del frente de la cola
+    int final;                      // Índice del final de la cola
+    int tamano;                     // Cantidad de elementos en la cola
+
+public:
+    Cola() {
+        this->frente = -1;          // Se inicializa el frente en -1 (cola vacía)
+        this->final = -1;           // Se inicializa el final en -1 (cola vacía)
+        this->tamano = 0;           // Se inicializa el tamaño en 0 (cola vacía)
+    }
+
+    void encolar(int elemento) {
+        if (tamano >= MAX_ELEMENTOS) {  // Si la cola está llena
+            std::cout << "Error: la cola está llena" << std::endl;  // Se muestra un mensaje de error
+            return;                     // Se sale del método sin agregar el elemento
+        }
+
+        if (frente == -1) {             // Si la cola está vacía
+            frente = 0;                 // El frente se inicializa en 0
+        }
+
+        final++;                        // Se incrementa el índice del final
+        final %= MAX_ELEMENTOS;         // Se aplica el operador módulo para que el índice sea circular
+        elementos[final] = elemento;    // Se agrega el elemento al final de la cola
+        tamano++;                       // Se incrementa el tamaño de la cola
+    }
+
+    int desencolar() {
+        if (tamano <= 0) {              // Si la cola está vacía
+            std::cout << "Error: la cola está vacía" << std::endl;   // Se muestra un mensaje de error
+            return -1;                  // Se devuelve -1
+        }
+
+        int elemento = elementos[frente];  // Se obtiene el elemento del frente
+        frente++;                           // Se incrementa el índice del frente
+        frente %= MAX_ELEMENTOS;             // Se aplica el operador módulo para que el índice sea circular
+        tamano--;                           // Se decrementa el tamaño de la cola
+
+        if (tamano == 0) {              // Si la cola quedó vacía después de desencolar
+            frente = -1;                // Se resetea el frente a -1
+            final = -1;                 // Se resetea el final a -1
+        }
+
+        return elemento;                // Se devuelve el elemento del frente
+    }
+
+    int obtenerFrente() {
+        if (tamano <= 0) {              // Si la cola está vacía
+            std::cout << "Error: la cola está vacía" << std::endl;   // Se muestra un mensaje de error
+            return -1;                  // Se devuelve -1
+        }
+
+        return elementos[frente];       // Se devuelve el elemento del frente
+    }
+
+    bool estaVacia() {
+        return tamano == 0;             // La cola está vacía si el tamaño es 0
+    }
+
+    bool estaLlena() {
+        return tamano == MAX_ELEMENTOS; // La cola está llena si el tamaño es igual al tamaño máximo
+    }
+};
+
+int main() {
+    Cola cola;   // Se crea una instancia de la clase Cola
+
+    cola.encolar(10);
+    cola.encolar(20);
+    cola.encolar(30);
+
+    std::cout << "Elemento frontal: " << cola.obtenerFrente() << std::endl;
+
+    cola.desencolar();
+
+    std::cout << "Elemento frontal: " << cola.obtenerFrente() << std::endl;
+
+    cola.encolar(40);
+    cola.encolar(50);
+
+    std::cout << "¿Está vacía la cola? " << cola.estaVacia() << std::endl;
+    std::cout << "¿Está llena la cola? " << cola.estaLlena() << std::endl;
+
+    while (!cola.estaVacia()) {
+        std::cout << cola.desencolar() << " ";
+    }
+    std::cout << std::endl;
+
+    return 0;
+}
